@@ -1,0 +1,11 @@
+{
+  "one": {
+    "type": "requirement",
+    "requirement": {
+      "type": "true"
+    },
+    "action": {
+      "type": "hello"
+    }
+  }
+}
