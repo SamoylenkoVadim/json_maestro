@@ -2,10 +2,12 @@
   "one": {
     "type": "requirement",
     "requirement": {
-      "type": "true"
+      "type": "external",
+      "requirement": "ex_req"
     },
     "action": {
-      "type": "hello"
+      "type": "external",
+      "action": "two"
     }
   }
 }

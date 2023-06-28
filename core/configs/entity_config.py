@@ -1,11 +1,11 @@
-import core.asl_models.actions.actions as act
-import core.asl_models.operators.comparators as cmp
-import core.asl_models.operators.operators as op
-import core.asl_models.requirements.requirements as rq
+import core.basic_entities.actions.actions as act
+import core.basic_entities.operators.comparators as cmp
+import core.basic_entities.operators.operators as op
+import core.basic_entities.requirements.requirements as rq
 from core.model.registered import registered_factories
 
 
-class ABEntityConfig:
+class EntityConfig:
     def __init__(self):
         self.init_requirements()
         self.init_actions()

@@ -3,11 +3,11 @@ from typing import Dict, List, Any, Optional
 
 from lazy import lazy
 import core.logging_utils.logger_constants as log_const
-from core.asl_models.base_asl import BaseASL
-from core.asl_models.requirements.requirements import Requirement
+from core.basic_entities.base_entity import BaseEntity
+from core.basic_entities.requirements.requirements import Requirement
 from core.model.factory import build_factory, factory, list_factory
 from core.model.registered import Registered
-from core.utils.exceptions import ExperimentException
+from core.utils.exceptions import ActionException
 
 
 actions = Registered()
@@ -16,14 +16,14 @@ action_factory = build_factory(actions)
 external_actions = dict()
 
 
-class Action(BaseASL):
+class Action(BaseEntity):
     def __init__(self, items: Dict[str, Any], id: Optional[str] = None):
         super().__init__(items, id)
         self.key_name_value = log_const.ACTION_RUN_VALUE
 
     async def run(self, message):
         log_params = self._log_params()
-        raise ExperimentException("Action type is not specified")
+        raise ActionException("Action type is not specified")
 
 
 class CommandAction(Action):

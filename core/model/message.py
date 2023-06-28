@@ -1,7 +1,6 @@
 class Message:
     def __init__(self, name):
         self.name = name
-        pass
 
     def __repr__(self):
         pass

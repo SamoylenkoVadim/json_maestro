@@ -2,7 +2,7 @@
 from lazy import lazy
 from typing import Union, Any, Dict, List, Optional
 
-from core.asl_models.operators.comparators import MoreComparator, LessComparator, MoreOrEqualComparator, \
+from core.basic_entities.operators.comparators import MoreComparator, LessComparator, MoreOrEqualComparator, \
     LessOrEqualComparator, EqualComparator, NotEqualComparator, InComparator, Comparator
 from core.model.factory import build_factory, list_factory
 from core.model.registered import Registered

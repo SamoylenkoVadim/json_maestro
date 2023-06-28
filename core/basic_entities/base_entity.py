@@ -2,7 +2,7 @@ from typing import Dict, Any, Optional
 import core.logging_utils.logger_constants as log_const
 
 
-class BaseASL:
+class BaseEntity:
     version: Optional[int]
     id: Optional[str]
 

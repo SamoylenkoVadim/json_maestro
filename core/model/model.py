@@ -1,52 +1,53 @@
 import asyncio
-
-import core.asl_models.actions.actions as actions
-import core.asl_models.requirements.requirements as requirements
-from core.asl_models.actions.actions import Action
-from core.asl_models.requirements.requirements import Requirement
-from core.configs.ab_entity_config import ABEntityConfig
-from core.configs.configs import configs, experiments_raw, external_actions_raw, external_requirements_raw
+import core.basic_entities.actions.actions as actions
+import core.basic_entities.requirements.requirements as requirements
+from core.basic_entities.actions.actions import Action
+from core.basic_entities.requirements.requirements import Requirement
+from core.configs.entity_config import EntityConfig
+from core.configs.configs import actions_raw, external_actions_raw, external_requirements_raw
 from core.model.factory import dict_factory
 from core.model.message import Message
 
 
-class FLModel:
+class MaestroModel:
     def __init__(self):
-        print("FLModel.__init__ started.")
-        ABEntityConfig()
+        print("MaestroModel.__init__ started.")
+        self._actions = None
+        EntityConfig()
         self.build_data()
-        print("FLModel.__init__ finished.")
+        print("MaestroModel.__init__ finished.")
 
     @dict_factory(Action)
-    def build_external_actions(self):
+    def _build_external_actions(self):
         return external_actions_raw
 
     @dict_factory(Requirement)
-    def build_external_requirements(self):
+    def _build_external_requirements(self):
         return external_requirements_raw
 
     @dict_factory(Action)
-    def build_experiments(self):
-        return experiments_raw
+    def _build_actions(self):
+        return actions_raw
 
     def build_data(self):
-        actions.external_actions = self.build_external_actions()
-        requirements.external_requirements = self.build_external_requirements()
-        self._experiments = self.build_experiments()
+        actions.external_actions = self._build_external_actions()
+        requirements.external_requirements = self._build_external_requirements()
+        self._actions = self._build_actions()
 
     async def run(self, message: Message):
-        for exp_name, exp_value in self._experiments.items():
-            await self.run_one(exp_value, message)
+        for action_name, action in self._actions.items():
+            await self.run_one(action, message)
 
-    async def run_one(self, experiment, message):
+    @staticmethod
+    async def run_one(action, message):
         try:
-            await experiment.run(message)
+            await action.run(message)
         except Exception as e:
             print(e)
 
 
 async def main():
-    a = FLModel()
+    a = MaestroModel()
     msg = Message("hello")
     await a.run(msg)
 

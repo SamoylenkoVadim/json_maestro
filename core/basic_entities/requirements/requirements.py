@@ -1,11 +1,11 @@
 from typing import List, Optional, Dict, Any
 from lazy import lazy
 import core.logging_utils.logger_constants as log_const
-from core.asl_models.base_asl import BaseASL
+from core.basic_entities.base_entity import BaseEntity
 from core.model.factory import build_factory, list_factory, factory
 from core.model.message import Message
 from core.model.registered import Registered
-from core.utils.exceptions import ExperimentException
+from core.utils.exceptions import ActionException
 
 
 requirements = Registered()
@@ -15,7 +15,7 @@ requirement_factory = build_factory(requirements)
 external_requirements = dict()
 
 
-class Requirement(BaseASL):
+class Requirement(BaseEntity):
     def __init__(self, items: Dict[str, Any], id: Optional[str] = None) -> None:
         super().__init__(items, id)
         self.items = items or {}
@@ -23,7 +23,7 @@ class Requirement(BaseASL):
 
     def check(self, message: Message):
         log_params = self._log_params()
-        raise ExperimentException("Requirement type is not specified")
+        raise ActionException("Requirement type is not specified")
 
 
 class ExternalRequirement(Requirement):

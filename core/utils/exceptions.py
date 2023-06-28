@@ -1,5 +1,5 @@
 
-class ExperimentException(Exception):
+class ActionException(Exception):
     pass
 
 

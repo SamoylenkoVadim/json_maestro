@@ -1,6 +1,6 @@
 from functools import wraps
 
-from core.utils.exceptions import ExperimentException
+from core.utils.exceptions import ActionException
 
 
 def exc_handler_false(funct):
@@ -19,10 +19,10 @@ def exc_handler(funct):
     def _wrapper(obj, *args, **kwargs):
         try:
             return funct(obj, *args, **kwargs)
-        except ExperimentException:
+        except ActionException:
             """  Данное исключение вызывается в методе field_check, при проверке наличия полей сообщения, 
             там же, в случае отсутсвия поля, вызывается соответствующий system_log.
-                 ExperimentException обрабатываем в FlModel.run_one и отправляем метрику."""
+                 ActionException обрабатываем в MaestroModel.run_one и отправляем метрику."""
             pass
         except Exception as e:
             params = {
